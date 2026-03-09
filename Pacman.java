@@ -1,30 +1,21 @@
 import java.awt.*;
+import java.awt.event.*;
 
 public class Pacman extends Frame
 {
     public Pacman()
     {
         super("Dibujo3");
-    }
-
-    public boolean handleEvent(Event event)
-    {
-        if(event.id==Event.WINDOW_DESTROY)
-        {
-            hide();
-            dispose();
-            return true;
-        }
-        else
-        {
-            return super.handleEvent(event);
-        }
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                System.exit(0);
+            }
+        });
     }
 
     public void paint(Graphics g)               //acá se programan los graficos
     {
-        Color color;
-
         g.setColor(Color.BLACK);
         g.fillRect(0,0, 350, 350);
         g.setColor(Color.YELLOW);
@@ -34,7 +25,7 @@ public class Pacman extends Frame
     public static void main(String[] args) 
     {
         Pacman dibujo = new Pacman();
-        dibujo.resize(350,350);
-        dibujo.show();
+        dibujo.setSize(350,350);
+        dibujo.setVisible(true);
     }
 }

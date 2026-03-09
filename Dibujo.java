@@ -1,29 +1,21 @@
 import java.awt.*;
+import java.awt.event.*;
 
 public class Dibujo extends Frame
 {
     public Dibujo()
     {
         super("Dibujo");
-    }
-
-    public boolean handleEvent(Event event)
-    {
-        if(event.id==Event.WINDOW_DESTROY)
-        {
-            hide();
-            dispose();
-            return true;
-        }
-        else
-        {
-            return super.handleEvent(event);
-        }
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                System.exit(0);
+            }
+        });
     }
 
     public void paint(Graphics g)               //acá se programan los graficos
     {
-        Color color = new Color(0x66,0x3a,0x3a);
         Font font = new Font("Times New Roman", Font.BOLD, 18);
         
         g.setFont(font);
@@ -44,7 +36,7 @@ public class Dibujo extends Frame
     public static void main(String[] args) 
     {
         Dibujo dibujo = new Dibujo();
-        dibujo.resize(350,350);
-        dibujo.show();
+        dibujo.setSize(350,350);
+        dibujo.setVisible(true);
     }
 }
